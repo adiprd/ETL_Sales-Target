@@ -9,7 +9,7 @@ ETL pipeline untuk memindahkan data sales target dari Oracle Database ke Postgre
 ```
 Oracle Database (Source) → Apache Airflow → PostgreSQL (Target)
       ↓
-APPS.KHS_CUSTOMERS_TRX_TARGETS → mb.sales_target
+APPS._CUSTOMERS_TRX_TARGETS → mb.sales_target
 ```
 
 ## Features
@@ -82,7 +82,7 @@ password: password
 
 ### Source Table (Oracle)
 ```sql
--- APPS.KHS_CUSTOMERS_TRX_TARGETS
+-- APPS._CUSTOMERS_TRX_TARGETS
 COLUMNS:
   id NUMBER
   product_id NUMBER
@@ -111,14 +111,14 @@ CREATE TABLE IF NOT EXISTS sales_target (
 init_oracle_client()
 
 # Verify source table existence
-verify_table_exists(connection, "APPS", "KHS_CUSTOMERS_TRX_TARGETS")
+verify_table_exists(connection, "APPS", "_CUSTOMERS_TRX_TARGETS")
 ```
 
 ### 2. **Extraction Phase**
 ```python
 # Stream results dengan chunking
 result = connection.execute(
-    text("SELECT * FROM APPS.KHS_CUSTOMERS_TRX_TARGETS"),
+    text("SELECT * FROM APPS._CUSTOMERS_TRX_TARGETS"),
     stream_results=True,
     yield_per=10000
 )
