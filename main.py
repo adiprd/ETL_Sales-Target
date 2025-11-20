@@ -79,7 +79,7 @@ def extract_and_load(**kwargs):
         logging.info("Connected to Oracle successfully")
 
         source_schema = "APPS"
-        source_table = "KHS_CUSTOMERS_TRX_TARGETS"
+        source_table = "_CUSTOMERS_TRX_TARGETS"
 
         if not verify_table_exists(oracle_connection, source_schema, source_table):
             raise ValueError(f"Source table {source_schema}.{source_table} does not exist")
